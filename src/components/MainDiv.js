@@ -49,7 +49,7 @@ function MainDiv() {
       <nav>
         <div className="nav-wrapper center-align">Employee Directory</div>
       </nav>
-      <ul id="nav-mobile" className="center hide-on-med-and-down">
+      <ul id="nav-mobile" className="center ">
         <button className="waves-effect waves-light btn-small" onClick={handleReturn}>
           {" "}
           full directory{" "}
