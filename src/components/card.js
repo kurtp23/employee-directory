@@ -2,8 +2,8 @@ import React from "react";
 
 function Cards({ person }) {
   return (
-    <div>
-      <div className="col s4 m3" key={person.phone}>
+    <div key={person.phone}>
+      <div className="col s4 m3">
         <div className="card small center-align">
           <div className="card-image ">
             <img
