@@ -47,16 +47,24 @@ function MainDiv() {
   return (
     <>
       <nav>
-        <div className="nav-wrapper center-align">
-          Employee Directory
-          <ul id="nav-mobile" className="right hide-on-med-and-down">
-            <button onClick={handleReturn}> full directory </button>
-            <button onClick={handleSort}> alphabetical order </button>
-            <button onClick={handleFilterMale}>Filter by male</button>
-            <button onClick={handleFilterFemale}>Filter by female</button>
-          </ul>
-        </div>
+        <div className="nav-wrapper center-align">Employee Directory</div>
       </nav>
+      <ul id="nav-mobile" className="center hide-on-med-and-down">
+        <button className="waves-effect waves-light btn-small" onClick={handleReturn}>
+          {" "}
+          full directory{" "}
+        </button>
+        <button className="waves-effect waves-light btn-small" onClick={handleSort}>
+          {" "}
+          alphabetical order{" "}
+        </button>
+        <button className="waves-effect waves-light btn-small" onClick={handleFilterMale}>
+          Filter by male
+        </button>
+        <button className="waves-effect waves-light btn-small" onClick={handleFilterFemale}>
+          Filter by female
+        </button>
+      </ul>
       <div className="row">
         {directory.map((person) => (
           <Cards person={person} />
