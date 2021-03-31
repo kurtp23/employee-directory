@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Directory from "./directory.js";
-
+import Cards from "./card.js";
+// import For from "react-loops";
 function MainDiv() {
-  const [directory, setDirectory] = useState({});
+  const [directory, setDirectory] = useState([]);
   const [dString, setDString] = useState("");
 
   useEffect(() => {
@@ -21,8 +22,8 @@ function MainDiv() {
       setDirectory(employees);
       setDString(r);
     });
+    return "hello";
   });
-
   console.log(directory);
 
   return (
@@ -45,21 +46,7 @@ function MainDiv() {
           </ul>
         </div>
       </nav>
-      <div className=" container ">
-        <div className="card ">
-          <div className="card-content center-align">
-            <h1>
-              {/* <i className="medium material-icons">{this.state.directory[0].name.first}</i> */}
-            </h1>
-
-            <div className=" col left-align ">test{dString}</div>
-          </div>
-
-          <div className="card-content center-align">
-            <span className="card-title activator grey-text text-darken-4"> </span>
-          </div>
-        </div>
-      </div>
+      <div className="row">{Cards(directory)}</div>
     </>
   );
 }
