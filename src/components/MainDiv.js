@@ -4,44 +4,29 @@ import Cards from "./card.js";
 // import For from "react-loops";
 function MainDiv() {
   const [directory, setDirectory] = useState([]);
-  const [directorySort, setDirectorySort] = useState([]);
-  const [directoryReturn, setDirectoryReturn] = useState([]);
+
+  const [display, setDisplay] = useState();
 
   useEffect(() => {
     Directory.search().then((data) => {
       const employees = data.data.results;
-
       setDirectory(employees);
-      setDirectoryReturn(employees);
       console.log(directory);
     });
   }, []);
   //ask teacher
-  const handleSort = () => {
-    const newDirectory = directory.sort((a, b) => a.name.first.localeCompare(b.name.first));
-    console.log(newDirectory);
-    setDirectorySort(newDirectory);
-  };
-  const handleFilterMale = () => {
-    const dirFilter = [];
-    directory.map((person) => {
-      if (person.gender === "male") {
-        dirFilter.push(person);
-      }
-    });
-    setDirectory(dirFilter);
-  };
-  const handleFilterFemale = () => {
-    const dirFilter = [];
-    directory.map((person) => {
-      if (person.gender === "female") {
-        dirFilter.push(person);
-      }
-    });
-    setDirectory(dirFilter);
-  };
-  const handleReturn = () => {
-    setDirectory(directoryReturn);
+  const handleDisplay = (display) => {
+    switch (display) {
+      case "alphabetical":
+        const newDirectory = [...directory];
+        return newDirectory.sort((a, b) => a.name.first.localeCompare(b.name.first));
+      case "male":
+        return directory.filter((person) => person.gender === "male");
+      case "female":
+        return directory.filter((person) => person.gender !== "male");
+      default:
+        return directory;
+    }
   };
 
   return (
@@ -50,23 +35,26 @@ function MainDiv() {
         <div className="nav-wrapper center-align">Employee Directory</div>
       </nav>
       <ul id="nav-mobile" className="center ">
-        <button className="waves-effect waves-light btn-small" onClick={handleReturn}>
+        <button className="waves-effect waves-light btn-small" onClick={() => setDisplay()}>
           {" "}
           full directory{" "}
         </button>
-        <button className="waves-effect waves-light btn-small" onClick={handleSort}>
+        <button
+          className="waves-effect waves-light btn-small"
+          onClick={() => setDisplay("alphabetical")}
+        >
           {" "}
           alphabetical order{" "}
         </button>
-        <button className="waves-effect waves-light btn-small" onClick={handleFilterMale}>
+        <button className="waves-effect waves-light btn-small" onClick={() => setDisplay("male")}>
           Filter by male
         </button>
-        <button className="waves-effect waves-light btn-small" onClick={handleFilterFemale}>
+        <button className="waves-effect waves-light btn-small" onClick={() => setDisplay("female")}>
           Filter by female
         </button>
       </ul>
       <div className="row">
-        {directory.map((person) => (
+        {handleDisplay(display).map((person) => (
           <Cards person={person} />
         ))}
       </div>
